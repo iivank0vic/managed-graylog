@@ -4,7 +4,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
@@ -12,4 +12,20 @@ jobs:
           server: ${{ secrets.FTP_HOSTNAME }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWD }}
+          # protocol: ftps   # recommended if your host supports it
           local-dir: ./
+          # Setting exclude replaces the action's defaults, so .git and node_modules are listed again.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            .github/**
+            src/**
+            bin/**
+            docs/**
+            package.json
+            package-lock.json
+            includes/config.local.php
+            storage/ratelimit/*.json
+            storage/submissions/*.json
+            storage/.app_secret

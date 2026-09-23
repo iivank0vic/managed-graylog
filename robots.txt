@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /contact?*
+Disallow: /storage/
+Disallow: /includes/
+
+Sitemap: https://managed-graylog.com/sitemap.xml

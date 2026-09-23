@@ -1,0 +1,45 @@
+/* Scroll reveal — only when JS is running and motion is allowed. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    transition-delay: var(--d, 0s);
+  }
+  .js [data-reveal].is-visible { opacity: 1; transform: none; }
+
+  /* Hero animates on load with CSS only (no JS dependency, no flash). */
+  .hero [data-reveal] { opacity: 1; transform: none; transition: none; animation: rise 0.9s var(--ease) both; }
+  .hero__copy [data-reveal]:nth-child(1) { animation-delay: 0.05s; }
+  .hero__copy [data-reveal]:nth-child(2) { animation-delay: 0.12s; }
+  .hero__copy [data-reveal]:nth-child(3) { animation-delay: 0.2s; }
+  .hero__copy [data-reveal]:nth-child(4) { animation-delay: 0.28s; }
+  .hero__copy [data-reveal]:nth-child(5) { animation-delay: 0.36s; }
+  .hero__visual[data-reveal] { animation-delay: 0.3s !important; animation-duration: 1.2s !important; }
+
+  .cp-pulse { animation: pulse 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .cp-bar--a1 { animation: bar 3.2s ease-in-out infinite; }
+  .cp-bar--a2 { animation: bar 2.6s ease-in-out -1s infinite; }
+  .cp-bar--b1 { animation: bar 3.6s ease-in-out -2s infinite; }
+  .cp-bar--b2 { animation: bar 2.9s ease-in-out -0.4s infinite; }
+  .status-pill__dot { animation: pulse 2.4s ease-in-out infinite; }
+}
+
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+@keyframes bar {
+  0%, 100% { transform: scaleX(0.28); }
+  40% { transform: scaleX(0.62); }
+  70% { transform: scaleX(0.4); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cp-pkts, .ad-pkts { display: none; }
+  .ad-edge.is-hot { animation: none; stroke-dasharray: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

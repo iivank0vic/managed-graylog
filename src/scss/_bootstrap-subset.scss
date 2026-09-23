@@ -1,0 +1,29 @@
+// Bootstrap 5.3 — only the parts this site uses (reboot, containers, grid, helpers, utilities).
+// Components (buttons, navbar, cards, accordion…) are custom-built in _site.scss.
+
+$enable-dark-mode: false;
+$enable-smooth-scroll: false; // handled in _site.scss with reduced-motion guard
+$body-bg: #07090d;
+$body-color: #e6ebf2;
+$font-family-sans-serif: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+$font-family-monospace: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+$link-color: #7dd3fc;
+$link-decoration: none;
+$link-hover-decoration: underline;
+$grid-gutter-width: 1.5rem;
+$container-max-widths: (sm: 540px, md: 720px, lg: 960px, xl: 1180px, xxl: 1280px);
+
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/variables-dark";
+@import "../../node_modules/bootstrap/scss/maps";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/utilities";
+// Keep only the utility groups the templates use.
+$utilities: map-get-multiple($utilities, ("display", "width"));
+@import "../../node_modules/bootstrap/scss/root";
+@import "../../node_modules/bootstrap/scss/reboot";
+@import "../../node_modules/bootstrap/scss/containers";
+@import "../../node_modules/bootstrap/scss/grid";
+@import "../../node_modules/bootstrap/scss/helpers";
+@import "../../node_modules/bootstrap/scss/utilities/api";
