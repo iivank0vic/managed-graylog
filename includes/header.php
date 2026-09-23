@@ -62,7 +62,7 @@ $infra    = array_filter(data('infrastructure'), static fn(array $p): bool => !e
 <meta property="og:image" content="<?= e($ogImage) ?>">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="managed-graylog — Graylog infrastructure, deployed and operated">
+<meta property="og:image:alt" content="Managed Graylog — Graylog infrastructure, deployed and operated">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?= e($page['og_title'] ?? $title) ?>">
@@ -76,9 +76,9 @@ $infra    = array_filter(data('infrastructure'), static fn(array $p): bool => !e
 
 <header class="site-header" data-header>
   <div class="container-xl site-header__inner">
-    <a class="brand" href="<?= e(url('/')) ?>" aria-label="managed-graylog home">
+    <a class="brand" href="<?= e(url('/')) ?>" aria-label="Managed Graylog home">
       <?= brand_mark() ?>
-      <span class="brand__word">managed<span class="brand__dash">-</span>graylog</span>
+      <span class="brand__word">Managed <span class="brand__accent">Graylog</span></span>
     </a>
 
     <nav class="primary-nav" aria-label="Primary">

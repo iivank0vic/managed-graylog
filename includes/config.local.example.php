@@ -13,8 +13,9 @@ return [
     'app_secret' => 'REPLACE_WITH_64_HEX_CHARS',
 
     'mail' => [
-        'to'   => 'you@your-company.example',
-        'from' => 'no-reply@managed-graylog.com',
+        // Only override if requests should go somewhere other than contact@managed-graylog.com
+        // 'to'   => 'contact@managed-graylog.com',
+        // 'from' => 'no-reply@managed-graylog.com',
     ],
 
     // Recommended: keep writable state outside the public web root.

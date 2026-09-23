@@ -23,6 +23,7 @@ _Last reviewed: 23 September 2026. Not legal advice — have counsel review befo
 - **Commercial features** are routed to the vendor: "customers requiring commercial Graylog functionality obtain the appropriate license from the vendor".
 - **Elasticsearch** is not promised anywhere for new builds; copy uses "Graylog Data Node / OpenSearch".
 - **No logos.** Providers are shown as neutral monograms (H, A, G…). No Graylog logo or visual identity is used; the brand mark is original.
+- **Brand name "Managed Graylog"** contains a third-party trademark. It is always shown with our own mark (never Graylog's logo/colours) and next to non-affiliation notices. Before investing in the brand (print, ads, company name), get a trademark opinion or ask Graylog, Inc. for permission — a descriptive rename (e.g. "… for Graylog") is the fallback.
 - **Footer + /terms + /licensing** carry the non-affiliation and trademark notices.
 
 ## 3. Claims that must NOT be made without verification

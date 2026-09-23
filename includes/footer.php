@@ -14,9 +14,9 @@ $vat       = config('company.vat_id');
   <div class="container-xl">
     <div class="site-footer__top">
       <div class="site-footer__brand">
-        <a class="brand" href="<?= e(url('/')) ?>" aria-label="managed-graylog home">
+        <a class="brand" href="<?= e(url('/')) ?>" aria-label="Managed Graylog home">
           <?= brand_mark() ?>
-          <span class="brand__word">managed<span class="brand__dash">-</span>graylog</span>
+          <span class="brand__word">Managed <span class="brand__accent">Graylog</span></span>
         </a>
         <p class="site-footer__tagline">Graylog infrastructure, designed, deployed and operated on the servers and clouds you choose.</p>
         <a class="site-footer__mail mono" href="mailto:<?= e(config('contact_email')) ?>"><?= e(config('contact_email')) ?></a>

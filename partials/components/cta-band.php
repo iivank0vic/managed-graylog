@@ -13,7 +13,7 @@ $href  = ($GLOBALS['CURRENT_PATH'] ?? '') === '/' ? '#request' : url('/contact')
       <p class="cta-band__text"><?= e($text) ?></p>
       <div class="cta-band__actions">
         <a class="btn-x btn-x--primary btn-x--lg" href="<?= e($href) ?>">Design My Deployment <?= icon('arrow-right') ?></a>
-        <a class="btn-x btn-x--ghost btn-x--lg" href="mailto:<?= e(config('contact_email')) ?>"><?= icon('mail') ?> <?= e(config('contact_email')) ?></a>
+        <a class="btn-x btn-x--ghost btn-x--lg" href="mailto:<?= e(config('contact_email')) ?>"><?= icon('mail') ?> <span class="d-none d-sm-inline"><?= e(config('contact_email')) ?></span><span class="d-sm-none">Email us</span></a>
       </div>
     </div>
   </div>

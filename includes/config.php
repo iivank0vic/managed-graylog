@@ -11,13 +11,13 @@ declare(strict_types=1);
 
 $config = [
     'env'         => 'production',          // 'production' | 'development'
-    'site_name'   => 'managed-graylog',
+    'site_name'   => 'Managed Graylog',
     'domain'      => 'managed-graylog.com',
     'base_url'    => 'https://managed-graylog.com', // no trailing slash
     'locale'      => 'en',
     'theme_color' => '#07090d',
 
-    // Public contact address shown on the site. PLACEHOLDER — confirm the mailbox exists.
+    // Public contact address shown on the site and used in schema.org data.
     'contact_email' => 'contact@managed-graylog.com',
 
     // Legal entity details. PLACEHOLDER — leave null until real values exist.
@@ -36,9 +36,9 @@ $config = [
         // 'mail'  = PHP mail() (requires a working MTA on the host)
         // 'log'   = do not send, only store (useful for staging)
         'transport'      => 'mail',
-        'to'             => 'contact@managed-graylog.com', // PLACEHOLDER
-        'from'           => 'no-reply@managed-graylog.com', // must be a domain you send for (SPF/DKIM)
-        'subject_prefix' => '[managed-graylog] ',
+        'to'             => 'contact@managed-graylog.com',  // inbox that receives form requests
+        'from'           => 'no-reply@managed-graylog.com', // sender address; domain needs SPF/DKIM/DMARC
+        'subject_prefix' => '[Managed Graylog] ',
     ],
 
     'form' => [

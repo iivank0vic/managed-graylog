@@ -14,7 +14,7 @@ return [
     'description' => '120–160 character summary used for the meta description and article cards.',
     'date'        => '2026-01-01',   // ISO date, published
     'updated'     => null,           // ISO date when materially updated
-    'author'      => 'managed-graylog engineering',
+    'author'      => 'Managed Graylog engineering',
     'tags'        => ['Architecture', 'Clusters'],
     'reading_time'=> 8,              // minutes
     'body'        => <<<'HTML'

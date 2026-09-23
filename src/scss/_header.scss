@@ -26,15 +26,16 @@ body.menu-open .site-header {
   gap: 0.6rem;
   color: var(--text);
   text-decoration: none !important;
-  font-family: var(--mono);
-  font-weight: 600;
-  font-size: 0.98rem;
-  letter-spacing: -0.02em;
+  font-family: var(--font);
+  font-weight: 650;
+  font-size: 1.05rem;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
   flex: none;
 }
 .brand:hover { color: #fff; }
 .brand__mark { display: block; }
-.brand__dash { color: var(--cyan); }
+.brand__accent { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
 .primary-nav { margin-left: auto; display: none; }
 @media (min-width: 992px) { .primary-nav { display: block; } }

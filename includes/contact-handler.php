@@ -260,7 +260,7 @@ function send_request_mail(array $r): bool
         . "\n\n--- Additional requirements ---\n" . $r['notes'] . "\n";
 
     $headers = [
-        'From: managed-graylog <' . $from . '>',
+        'From: Managed Graylog <' . $from . '>',
         'Reply-To: ' . $r['email'], // validated with FILTER_VALIDATE_EMAIL and newline-free
         'MIME-Version: 1.0',
         'Content-Type: text/plain; charset=UTF-8',
