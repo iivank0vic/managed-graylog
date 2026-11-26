@@ -220,3 +220,14 @@ select.input option { background: #0c1119; color: var(--text); }
 .aside-steps li::marker { color: var(--cyan); font-family: var(--mono); }
 .aside-card--muted p { margin: 0; display: flex; gap: 0.6rem; font-size: 0.85rem; color: var(--text-2); }
 .aside-card--muted .icon { color: var(--sky); margin-top: 3px; }
+
+/* Quick message form (contact page) */
+.msg-layout { display: grid; gap: 1.75rem; }
+@media (min-width: 992px) { .msg-layout { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 2.5rem; align-items: start; } }
+.msg-layout__lead { color: var(--text-2); margin: 0.75rem 0 1.25rem; max-width: 34rem; }
+.msg-layout__facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; font-size: 0.9rem; color: var(--text-2); }
+.msg-layout__facts li { display: flex; align-items: center; gap: 0.6rem; }
+.msg-layout__facts .icon { color: var(--cyan); flex: none; }
+.msgbox { display: grid; gap: 1rem; min-width: 0; }
+.msgbox__result:empty { display: none; }
+.msgbox__form .fs { border-bottom: 1px solid var(--line); }

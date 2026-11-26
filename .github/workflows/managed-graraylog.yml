@@ -1,4 +1,7 @@
-on: push
+on:
+  push:
+    branches: [main]   # only main deploys; feature branches / PRs do not touch the live site
+  workflow_dispatch:
 name: Deploy
 jobs:
   deploy:

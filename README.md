@@ -16,7 +16,8 @@ includes/
   seo.php                  Meta + Schema.org builders
   header.php · footer.php  Layout
   icons.php                Inline SVG icons (Lucide, ISC) + brand mark
-  contact-handler.php      Form processing (validation, anti-spam, mail)
+  contact-handler.php      Form processing: deployment request + quick message (validation, anti-spam)
+  mailer.php               Outgoing mail: Mailgun API / PHP mail() / log transports
   blog.php                 File-based blog
   data/                    Content: services, infrastructure, solutions, faq, form options
 pages/                     One view per page type (home, service, infrastructure, …)
@@ -46,7 +47,7 @@ npm run serve   # http://127.0.0.1:8080
 - [Licensing-sensitive wording & claims NOT to make](docs/LICENSING-AND-CLAIMS.md)
 
 ## Before launch
-Replace placeholders (company details, contact mailbox), complete `/privacy` and `/terms`, and have the licensing wording reviewed.
+Configure Mailgun (see [Deployment → Mailgun](docs/DEPLOYMENT.md#mailgun)), replace placeholders (company details, contact mailbox), complete `/privacy` and `/terms`, and have the licensing wording reviewed.
 
 Graylog is a trademark of its respective owner. This project is not affiliated with Graylog, Inc.
 Third-party: Bootstrap (MIT), Lucide icons (ISC), Inter & JetBrains Mono fonts (SIL OFL 1.1).

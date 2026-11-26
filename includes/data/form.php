@@ -1,11 +1,19 @@
 <?php
 /**
- * Deployment request form definition — shared by the form partial and the server-side handler.
+ * Form option definitions (deployment request + quick message) — shared by the form partial and the server-side handler.
  * Select/radio values are whitelisted server-side against these keys.
  */
 declare(strict_types=1);
 
 return [
+    // Short contact form ("quick message") topics.
+    'topic' => [
+        'question'    => 'General question',
+        'quote'       => 'Quote / pricing',
+        'existing'    => 'Existing Graylog setup — help needed',
+        'partnership' => 'Partnership / reseller',
+        'other'       => 'Something else',
+    ],
     'environment' => [
         'new'           => 'Nothing yet — new deployment',
         'single'        => 'Single Graylog server',

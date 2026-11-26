@@ -17,7 +17,7 @@ partial('components/page-hero', [
       <p><?= e($controller) ?><?php if ($a = config('company.address')): ?>, <?= e($a) ?><?php endif; ?>. Contact: <a href="mailto:<?= e(config('contact_email')) ?>"><?= e(config('contact_email')) ?></a>.</p>
 
       <h2>What we collect</h2>
-      <p>When you submit the deployment request form, we process the details you enter: name, company, email address and the technical information you choose to provide about your environment. We ask you not to submit passwords, keys or other credentials.</p>
+      <p>When you submit the deployment request form or the quick message form, we process the details you enter: name, company, email address, your message and the technical information you choose to provide about your environment. We ask you not to submit passwords, keys or other credentials.</p>
       <p>Our web server processes technical data required to deliver the site, such as IP address, requested URL, time and user agent, in server logs. The contact form uses a session cookie for security (CSRF protection). We do not use analytics or advertising cookies. <em>[Update this section if analytics are added.]</em></p>
 
       <h2>Purpose and legal basis</h2>
@@ -27,7 +27,7 @@ partial('components/page-hero', [
       <p>[PLACEHOLDER: define retention periods, e.g. requests that do not lead to a contract are deleted after N months; rate-limit data is kept for at most one hour in hashed form.]</p>
 
       <h2>Recipients</h2>
-      <p>[PLACEHOLDER: hosting provider, email provider and any other processors, with their locations.]</p>
+      <p>Form submissions are delivered to our inbox through our email delivery provider Mailgun Technologies, Inc. (Sinch group) acting as processor<?= config('mailgun.region', 'eu') === 'eu' ? ', using its EU region' : '' ?>. [PLACEHOLDER: hosting provider, inbox provider and any other processors, with their locations and transfer safeguards.]</p>
 
       <h2>Your rights</h2>
       <p>You have the right to access, rectification, erasure, restriction, data portability and objection, and to withdraw consent at any time. You may lodge a complaint with a supervisory authority.</p>
