@@ -8,7 +8,7 @@
 | Rate limiting: 5 valid submissions / IP / hour, HMAC-hashed IPs, file lock | `rate_limit_allow()` |
 | Server-side validation, whitelisted select values, length limits, control-char stripping | `validate_request()` |
 | Rejects text that looks like credentials (private keys, AWS/GitHub/Slack/Google keys, `password=…`) | `looks_like_secret()` + same check client-side |
-| No user input in mail headers except validated `Reply-To`; base64-encoded subject | `send_request_mail()` |
+| No user input in mail headers except validated `Reply-To`; CR/LF stripped; Mailgun API key only in config.local.php / env, never logged | `includes/mailer.php` |
 | Output escaping via `e()` everywhere; JSON-LD encoded with `JSON_HEX_TAG` | templates, `json_ld()` |
 | Strict CSP (`default-src 'self'`, no inline scripts/styles), `nosniff`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, COOP | `.htaccess` + `bootstrap.php` |
 | Private dirs blocked (`includes`, `storage`, `docs`, …), direct `.php` access denied except `index.php` | `.htaccess`, per-dir `.htaccess` |
@@ -18,7 +18,7 @@
 ## Recommendations
 - Move `storage_path` outside the web root.
 - Enable HSTS after confirming HTTPS everywhere; consider HSTS preload later.
-- Use an authenticated SMTP/API mail transport (PHPMailer, Postmark, SES) instead of `mail()`.
+- Use the Mailgun API transport (domain-scoped Sending API key) instead of `mail()` — see DEPLOYMENT.md → Mailgun.
 - Define and automate retention for `storage/submissions` (e.g. cron deleting files older than N days) — or set `form.store_submissions` to `false`.
 - Add Cloudflare Turnstile / hCaptcha only if spam appears (update CSP accordingly).
 - Keep PHP patched; disable `expose_php`.

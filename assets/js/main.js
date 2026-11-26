@@ -345,7 +345,7 @@
         const data = await res.json().catch(() => ({ ok: false, errors: {}, message: 'Unexpected response.' }));
         if (data.ok) {
           form.reset();
-          if (data.token && form.elements._token) form.elements._token.value = data.token;
+          if (data.token) $$('input[name="_token"]').forEach((t) => { t.value = data.token; });
           renderPreview();
           showResult(true, data.message || 'An engineer will review your details and reply by email.');
         } else {
@@ -365,6 +365,109 @@
     const serverResult = $('[data-form-result]', form.parentElement);
     if (serverResult) serverResult.focus({ preventScroll: true });
   }
+
+  /* ------------------------------------------------------------------
+   * Quick message form (and any other simple [data-ajax-form])
+   * ---------------------------------------------------------------- */
+  $$('[data-ajax-form]').forEach((mform) => {
+    const prefix = mform.dataset.errPrefix || 'err-';
+    const box = mform.closest('[data-msgbox]') || mform.parentElement;
+    const slot = $('[data-form-result-slot]', box) || box;
+    const secretRe = [
+      /-----BEGIN [A-Z ]*PRIVATE KEY-----/, /\bAKIA[0-9A-Z]{16}\b/, /\b(?:ghp|gho|ghs|github_pat)_[A-Za-z0-9_]{20,}/,
+      /\bxox[baprs]-[A-Za-z0-9-]{10,}/, /\bAIza[0-9A-Za-z_\-]{35}\b/,
+      /\b(?:password|passwd|pwd|secret|api[_-]?key|token)\s*[:=]\s*(?=\S*[\d!@#$%^&*])\S{8,}/i,
+    ];
+
+    const setError = (name, msg) => {
+      const err = $(`#${prefix}${name}`, mform);
+      const field = mform.elements[name];
+      if (err) { err.textContent = msg || ''; err.hidden = !msg; }
+      if (field && field.setAttribute) {
+        if (msg) field.setAttribute('aria-invalid', 'true'); else field.removeAttribute('aria-invalid');
+      }
+    };
+    const clearErrors = () => $$(`[id^="${prefix}"]`, mform).forEach((el) => setError(el.id.slice(prefix.length), ''));
+
+    const validate = () => {
+      const el = mform.elements;
+      const errors = {};
+      if (el.name && el.name.value.trim().length < 2) errors.name = 'Please enter your name.';
+      if (el.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(el.email.value.trim())) errors.email = 'Please enter a valid email address.';
+      if (el.topic && !el.topic.value) errors.topic = 'Please choose a topic.';
+      if (el.message) {
+        const v = el.message.value.trim();
+        if (v.length < 10) errors.message = 'Please write a short message (at least 10 characters).';
+        else if (secretRe.some((re) => re.test(v))) errors.message = 'This looks like it may contain a password, key or token. Please remove it.';
+      }
+      if (el.consent && !el.consent.checked) errors.consent = 'Please confirm so we can process your request.';
+      clearErrors();
+      Object.entries(errors).forEach(([k, v]) => setError(k, v));
+      return errors;
+    };
+
+    const showResult = (ok, message) => {
+      slot.textContent = '';
+      const div = document.createElement('div');
+      div.className = `form-result form-result--${ok ? 'ok' : 'err'}`;
+      div.setAttribute('role', ok ? 'status' : 'alert');
+      div.tabIndex = -1;
+      const inner = document.createElement('div');
+      const strong = document.createElement('strong');
+      strong.textContent = ok ? `${mform.dataset.okTitle || 'Sent.'} ` : 'Something needs attention. ';
+      inner.append(strong, document.createTextNode(message));
+      div.append(inner);
+      slot.append(div);
+      div.focus({ preventScroll: true });
+      div.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'center' });
+    };
+
+    mform.addEventListener('submit', async (e) => {
+      const errors = validate();
+      if (Object.keys(errors).length) {
+        e.preventDefault();
+        const first = mform.elements[Object.keys(errors)[0]];
+        if (first && first.focus) first.focus();
+        return;
+      }
+      if (!window.fetch || !window.FormData) return; // normal POST fallback
+      e.preventDefault();
+      const btn = $('[data-submit]', mform);
+      const lbl = $('[data-submit-label]', mform);
+      const original = lbl.textContent;
+      btn.classList.add('is-loading');
+      btn.disabled = true;
+      lbl.textContent = 'Sending…';
+      try {
+        const res = await fetch(mform.action.split('#')[0], {
+          method: 'POST',
+          body: new FormData(mform),
+          headers: { Accept: 'application/json' },
+          credentials: 'same-origin',
+        });
+        const data = await res.json().catch(() => ({ ok: false, errors: {}, message: 'Unexpected response.' }));
+        if (data.ok) {
+          mform.reset();
+          if (data.token && mform.elements._token) mform.elements._token.value = data.token;
+          // Keep CSRF tokens in other forms on the page in sync after rotation.
+          if (data.token) $$('input[name="_token"]').forEach((t) => { t.value = data.token; });
+          showResult(true, data.message || 'Thanks — we will reply soon.');
+        } else {
+          Object.entries(data.errors || {}).forEach(([k, v]) => { if (k !== '_form') setError(k, v); });
+          showResult(false, data.message || 'Please check the highlighted fields.');
+        }
+      } catch (err) {
+        showResult(false, 'Network error. Please try again, or email us directly.');
+      } finally {
+        btn.classList.remove('is-loading');
+        btn.disabled = false;
+        lbl.textContent = original;
+      }
+    });
+
+    const serverResult = $('[data-form-result]', slot);
+    if (serverResult) serverResult.focus({ preventScroll: true });
+  });
 
   /* ------------------------------------------------------------------
    * FAQ: open the item targeted by the URL hash

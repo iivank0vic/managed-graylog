@@ -33,12 +33,27 @@ $config = [
     'same_as' => [],
 
     'mail' => [
-        // 'mail'  = PHP mail() (requires a working MTA on the host)
-        // 'log'   = do not send, only store (useful for staging)
-        'transport'      => 'mail',
-        'to'             => 'contact@managed-graylog.com',  // inbox that receives form requests
-        'from'           => 'no-reply@managed-graylog.com', // sender address; domain needs SPF/DKIM/DMARC
+        // 'auto'    = Mailgun when mailgun.api_key + mailgun.domain are set, otherwise PHP mail()
+        // 'mailgun' = Mailgun HTTP API (recommended)
+        // 'mail'    = PHP mail() (requires a working MTA on the host)
+        // 'log'     = do not send, only store + log (useful for staging / local dev)
+        'transport'      => 'auto',
+        'to'             => 'contact@managed-graylog.com',  // inbox that receives deployment requests
+        'to_messages'    => null,                           // inbox for quick messages (null = same as 'to')
+        'from'           => 'no-reply@managed-graylog.com', // sender; must be on your Mailgun sending domain
+        'from_name'      => 'Managed Graylog',
         'subject_prefix' => '[Managed Graylog] ',
+        'autoreply'      => false,                          // send a short confirmation to the person who submitted
+    ],
+
+    // Mailgun API. Keep api_key OUT of this file: set it in config.local.php
+    // or as env vars MAILGUN_API_KEY / MAILGUN_DOMAIN / MAILGUN_REGION.
+    'mailgun' => [
+        'api_key'  => null,   // Sending API key (Mailgun → Sending → Domain settings → Sending API keys)
+        'domain'   => null,   // sending domain, e.g. 'mg.managed-graylog.com'
+        'region'   => 'eu',   // 'eu' (api.eu.mailgun.net) or 'us' (api.mailgun.net) — must match the domain's region
+        'endpoint' => null,   // optional base URL override (testing only)
+        'timeout'  => 10,     // seconds
     ],
 
     'form' => [

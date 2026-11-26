@@ -29,6 +29,11 @@ if ($path === '/contact' && $method === 'POST') {
     handle_contact_submission();
     exit;
 }
+if ($path === '/contact/message' && $method === 'POST') {
+    require __DIR__ . '/includes/contact-handler.php';
+    handle_message_submission();
+    exit;
+}
 
 if (!in_array($method, ['GET', 'HEAD'], true)) {
     http_response_code(405);
